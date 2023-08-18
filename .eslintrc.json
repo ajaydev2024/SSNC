@@ -1,12 +1,4 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": [
-    // ...other plugins
-    "node"
-  ],
-  "rules": {
-    // ...other rules
-    "node/no-template-curly-in-string": "off"
-  }
+  "extends": "next/core-web-vitals"
 }
 
