@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/inventoryItems.css';
-
+import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -11,5 +11,10 @@ export default function App({ Component, pageProps }) {
   useEffect(() => {   
   }, [router]);
 
-  return <Component {...pageProps} />;
+  return( 
+    <>
+    <Component {...pageProps} />
+    <Analytics />
+    </>
+  );
 }
