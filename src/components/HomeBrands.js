@@ -19,7 +19,7 @@ const HomeBrands = () => {
                     Click on Any Supplement Brands to Shows its Items
                 </h2>
             </div>
-            <div className="grid grid-cols-3  lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-9 gap-6">
                 {/* Replace with your brand data */}
                 {brands.map((brand, index) => (
                     <div
@@ -29,10 +29,10 @@ const HomeBrands = () => {
                     >
                         <div className="mb-8 ">
                             <Image
-                                className="object-center object-cover"
+                                className="object-center object-cover "
                                 src={brand.imageSrc}
-                                width={250}
-                                height={100}
+                                width={1000}
+                                height={500}
                                 blurDataURL="data:..."
                                 placeholder="blur" // Optional blur-up while loading
                                 alt={brand.altText}

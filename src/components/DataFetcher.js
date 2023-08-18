@@ -3,7 +3,8 @@ import vm from 'vm';
 import readJSFile from '@/utils/readFileforBatch';
 
 async function DataFetcher (context) {
-  const { selectedItem } = context.query;
+  let { selectedItem } = context.query;
+  selectedItem = decodeURIComponent(selectedItem);
 
   if (!selectedItem) {
     return null;

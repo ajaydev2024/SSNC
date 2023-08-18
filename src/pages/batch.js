@@ -13,8 +13,10 @@ const Batch = ({ itemData }) => {
   console.log("Batch DAta : ",itemData  );
   const contentRef = useRef();
   const router = useRouter();
-  const { selectedItem } = router.query;
-  // const contentDataUrl = 'https://i.ytimg.com/vi/FN8xhP1ZH78/sddefault.jpg';  Replace with your content image URL
+  let { selectedItem } = router.query;
+  selectedItem = decodeURIComponent(selectedItem);
+  console.log('Decoded Selected Item:', selectedItem);
+  
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
   const [Addboxes1, setAddboxes1] = useState('')

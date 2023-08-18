@@ -1,14 +1,10 @@
 const productItems = [
-  { name: 'Zeta Alanine', servings: 12 },
+  { name: 'Test Alanine', servings: 12 },
   { name: 'Vit E', servings: 0.05 },
   { name: 'Taurine', servings: 1 },
   { name: 'Caffeine', servings: 0.25 },
   { name: 'Vit A', servings: 0.05 },
-  { name: 'Taurine', servings: 1 },
-  { name: 'Caffeine', servings: 0.25 },
-  { name: 'Vit C', servings: 0.05 },
-  { name: 'Taurine', servings: 1 },
-  { name: 'Caffeine', servings: 0.25 },
+  
   { name: 'Carnitine Tartrate', servings: 0.25 },
   { name: 'Citric Acid', servings: 0.6 },
   { name: 'Flavour', servings: 0.15 },
