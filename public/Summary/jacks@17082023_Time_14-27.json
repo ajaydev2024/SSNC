@@ -1,0 +1,101 @@
+{
+  "selectedItem": "jacks.js",
+  "itemData": [
+    {
+      "name": "Beta Alanine",
+      "servings": 20
+    },
+    {
+      "name": "Vit C",
+      "servings": 0.15
+    },
+    {
+      "name": "Taurine",
+      "servings": 11
+    },
+    {
+      "name": "Calcium Silicate",
+      "servings": 0.03
+    },
+    {
+      "name": "Silicon Dioxide",
+      "servings": 0.04
+    },
+    {
+      "name": "Sucralose",
+      "servings": 0.1
+    },
+    {
+      "name": "Ace K",
+      "servings": 10.05
+    },
+    {
+      "name": "Color",
+      "servings": 0.001
+    },
+    {
+      "PackagingName": "19 oz Pet Black Bottle"
+    },
+    {
+      "PackagingName": "01 Silica (10gm)"
+    },
+    {
+      "PackagingName": "Scoop 7.5cc"
+    },
+    {
+      "PackagingName": "89mm Pole Cap"
+    },
+    {
+      "PackagingName": "Carton 19oz - 12pk"
+    }
+  ],
+  "totalServings": 41.371,
+  "boxes": "423423",
+  "batch1": "24",
+  "batch2": "234",
+  "batch3": "432",
+  "boxElements": [
+    "51173.89",
+    "383.80",
+    "28145.64",
+    "76.76",
+    "102.35",
+    "255.87",
+    "25714.88",
+    "2.56"
+  ],
+  "batch1Elements": [
+    "11.60",
+    "0.09",
+    "6.38",
+    "0.02",
+    "0.02",
+    "0.06",
+    "5.83",
+    "0.00"
+  ],
+  "batch2Elements": [
+    "113.12",
+    "0.85",
+    "62.22",
+    "0.17",
+    "0.23",
+    "0.57",
+    "56.84",
+    "0.01"
+  ],
+  "batch3Elements": [
+    "208.84",
+    "1.57",
+    "114.86",
+    "0.31",
+    "0.42",
+    "1.04",
+    "104.94",
+    "0.01"
+  ],
+  "totalBoxElements": "105855.75",
+  "totalBatch1Elements": "24.00",
+  "totalBatch2Elements": "234.00",
+  "totalBatch3Elements": "432.00"
+}

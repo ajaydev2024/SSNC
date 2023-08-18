@@ -1,0 +1,149 @@
+{
+  "selectedItem": "Pole.js",
+  "itemData": [
+    {
+      "name": "Zeta Alanine",
+      "servings": 2
+    },
+    {
+      "name": "Vit E",
+      "servings": 0.05
+    },
+    {
+      "name": "Taurine",
+      "servings": 1
+    },
+    {
+      "name": "Caffeine",
+      "servings": 0.25
+    },
+    {
+      "name": "Vit A",
+      "servings": 0.05
+    },
+    {
+      "name": "Taurine",
+      "servings": 1
+    },
+    {
+      "name": "Caffeine",
+      "servings": 0.25
+    },
+    {
+      "name": "Vit C",
+      "servings": 0.05
+    },
+    {
+      "name": "Taurine",
+      "servings": 1
+    },
+    {
+      "name": "Caffeine",
+      "servings": 0.25
+    },
+    {
+      "name": "Carnitine Tartrate",
+      "servings": 0.25
+    },
+    {
+      "name": "Citric Acid",
+      "servings": 0.6
+    },
+    {
+      "name": "Flavour",
+      "servings": 0.15
+    },
+    {
+      "name": "Malto",
+      "servings": 0.5
+    },
+    {
+      "name": "Calcium Silicate",
+      "servings": 0.03
+    },
+    {
+      "name": "Silicon Dioxide",
+      "servings": 0.04
+    },
+    {
+      "name": "Sucralose",
+      "servings": 0.1
+    },
+    {
+      "name": "Ace K",
+      "servings": 0.05
+    },
+    {
+      "name": "Color",
+      "servings": 0.001
+    },
+    {
+      "PackagingName": "19 oz Pet Black Bottle"
+    },
+    {
+      "PackagingName": "01 Silica (10gm)"
+    },
+    {
+      "PackagingName": "Scoop 7.5cc"
+    },
+    {
+      "PackagingName": "89mm Pole Cap"
+    },
+    {
+      "PackagingName": "Carton 19oz - 12pk"
+    }
+  ],
+  "totalServings": 17.621000000000006,
+  "boxes": "7865",
+  "batch1": "785",
+  "batch2": "",
+  "batch3": "",
+  "boxElements": [
+    "1339.03",
+    "5.58",
+    "111.59",
+    "27.90",
+    "5.58",
+    "111.59",
+    "27.90",
+    "5.58",
+    "111.59",
+    "27.90",
+    "27.90",
+    "66.95",
+    "16.74",
+    "55.79",
+    "3.35",
+    "4.46",
+    "11.16",
+    "5.58",
+    "0.11"
+  ],
+  "batch1Elements": [
+    "534.59",
+    "2.23",
+    "44.55",
+    "11.14",
+    "2.23",
+    "44.55",
+    "11.14",
+    "2.23",
+    "44.55",
+    "11.14",
+    "11.14",
+    "26.73",
+    "6.68",
+    "22.27",
+    "1.34",
+    "1.78",
+    "4.45",
+    "2.23",
+    "0.04"
+  ],
+  "batch2Elements": [],
+  "batch3Elements": [],
+  "totalBoxElements": "1966.25",
+  "totalBatch1Elements": "785.00",
+  "totalBatch2Elements": 0,
+  "totalBatch3Elements": 0
+}
