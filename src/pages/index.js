@@ -2,15 +2,21 @@ import React, { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import HomeBrands from '@/components/HomeBrands';
 
 export default function Home() {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedBrand, setSelectedBrand] = useState(null);
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`/api/search?query=${encodeURIComponent(searchQuery)}`);
+      let query = searchQuery;
+      if (selectedBrand) {
+        query = `${selectedBrand} ${searchQuery}`;
+      }
+      const response = await fetch(`/api/search?query=${encodeURIComponent(query)}`);
       if (response.status === 200) {
         const data = await response.json();
         setSearchResults(data);
@@ -34,9 +40,8 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-         
-      <div className="z-10 w-1/3 max-w-5xl items-center justify-between font-mono text-sm">
+    <main className="flex min-h-screen flex-col items-center justify-between p-2">
+      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm">
         <div className="fixed left-0 top-0 flex w-1/2 justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
           <input
             type="text"
@@ -46,6 +51,8 @@ export default function Home() {
             placeholder="Enter Item Name"
           />
         </div>
+        <HomeBrands />
+
         {searchQuery !== '' && (
           <ul className="text-center bg-grey-500 rounded-lg mt-8 p-4">
             {searchResults.map((fileName, index) => (
@@ -54,7 +61,7 @@ export default function Home() {
                 key={index}
                 onClick={() => handleItemClick(fileName)} // Added onClick to handle item click
               >
-                {fileName.slice(0,fileName.length-3)}
+                {fileName.slice(0, fileName.length - 3)}
               </li>
             ))}
           </ul>
