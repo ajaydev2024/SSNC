@@ -51,7 +51,7 @@ const Summary = ({ jsonData }) => {
                   <tbody>
                     {jsonItem.itemData?.map((innerItem, innerIndex) => (
                       <tr key={innerIndex}>
-                        <td>{innerItem.name || innerItem.PackagingName}</td>
+                        <td>{innerItem.name}</td>
                         <td>{innerItem.servings || ''}</td>
                         <td>{jsonItem.boxElements[innerIndex] || ''}</td>
                         <td>{jsonItem.batch1Elements[innerIndex] || ''}</td>
@@ -61,7 +61,7 @@ const Summary = ({ jsonData }) => {
                     ))}
                     <tr className="text-green-500 text-3xl font-extrabold">
                       <td>Total :</td>
-                      <td>{jsonItem.totalServings}</td>
+                      <td>{jsonItem.totalServings.toFixed(2)}</td>
                       <td>{jsonItem.totalBoxElements}</td>
                       <td>{jsonItem.totalBatch1Elements}</td>
                       <td>{jsonItem.totalBatch2Elements}</td>
@@ -77,28 +77,42 @@ const Summary = ({ jsonData }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {jsonItem.itemData?.map((innerItem, innerIndex) => (
-                      <tr key={innerIndex}>
-                        <td>{innerItem.PackagingName}</td>
-                        <td>
-                          {innerItem.PackagingName === 'Carton 19oz - 12pk'
-                            ? (
-                              parseFloat(
-                                jsonItem.boxes || jsonItem.batch1 || jsonItem.batch2 || jsonItem.batch3
-                              ) / 12
-                            ).toFixed(1)
-                            : jsonItem.boxes || jsonItem.batch1 || jsonItem.batch2 || jsonItem.batch3}
-                        </td>
-                      </tr>
-                    ))}
+                    {/* Product Items */}
+                    {jsonItem.itemData.map((innerItem, innerIndex) => {
+                      if (innerItem.name) {
+                        return null; // Skip rendering if item.name exists
+                      }
+                      return (
+                        <tr key={innerIndex}>
+                          <td>{innerItem.PackagingName}</td>
+                          <td>
+                            {innerItem.PackagingName === 'Carton 19oz - 12pk' ? (
+                              <span className="text-center">
+                                {jsonItem.boxes || jsonItem.batch1 || jsonItem.batch2 || jsonItem.batch3 ? (
+                                  (parseFloat(jsonItem.boxes || jsonItem.batch1 || jsonItem.batch2 || jsonItem.batch3) / 12).toFixed(1)
+                                ) : (
+                                  ''
+                                )}
+                              </span>
+                            ) : (
+                              <span className="text-center">
+                                {jsonItem.boxes || jsonItem.batch1 || jsonItem.batch2 || jsonItem.batch3}
+                              </span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })}
                   </tbody>
+
+
                 </table>
               </div>
             </div>
           </div>
         ))}
       </div>
-     
+
     </div>
   );
 };
