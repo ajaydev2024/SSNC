@@ -1,13 +1,11 @@
 "use client"
 import React from 'react';
 import Link from 'next/link';
-//import { useRouter } from 'next/navigation';
 
 const Navbar = () => {
-  //const router = useRouter();
   return (
     <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left" >
-        <a href="/">
+        <Link href="/">
         <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
           <h2 className={`mb-3 text-2xl font-semibold`}>
             Home{' '}
@@ -19,7 +17,7 @@ const Navbar = () => {
             Go to Home Page.
           </p>
         </div>
-        </a>
+        </Link>
       <Link href="/batch"  >
         <div className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
           <h2 className={`mb-3 text-2xl font-semibold`}>
