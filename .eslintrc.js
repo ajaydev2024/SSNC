@@ -24,11 +24,18 @@ module.exports = {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    plugins: ['node'], // Add 'node' to the plugins array
+    plugins: ['react', 'node'], // Make sure 'node' is listed as a plugin
     rules: {
         // ... other rules
         'react/react-in-jsx-scope': 'off', // Disable React scope rule
-        'react/prop-types': 'off' // Disable prop-types validation for now
-      }
+        'react/prop-types': 'off', // Disable prop-types validation for now
+        'node/no-template-curly-in-string': 'off'
+
+      },
+      settings: {
+        react: {
+          version: 'detect'
+        }
+      },
       
 }
