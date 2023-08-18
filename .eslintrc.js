@@ -3,10 +3,7 @@ module.exports = {
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:recommended",
-        "plugin:react/recommended"
-    ],
+    "extends": "next",
     "overrides": [
         {
             "env": {
@@ -29,7 +26,9 @@ module.exports = {
         // ... other rules
         'react/react-in-jsx-scope': 'off', // Disable React scope rule
         'react/prop-types': 'off', // Disable prop-types validation for now
-        'node/no-template-curly-in-string': 'off'
+        'node/no-template-curly-in-string': 'off', 
+        "react/no-unescaped-entities": "off",
+        "@next/next/no-page-custom-font": "off"
 
       },
       settings: {

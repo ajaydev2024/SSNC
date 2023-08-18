@@ -6,16 +6,11 @@ import { useRouter } from 'next/router';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 
-
-
-
 const Batch = ({ itemData }) => {
-  console.log("Batch DAta : ",itemData  );
   const contentRef = useRef();
   const router = useRouter();
   let { selectedItem } = router.query;
   selectedItem = decodeURIComponent(selectedItem);
-  console.log('Decoded Selected Item:', selectedItem);
   
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
