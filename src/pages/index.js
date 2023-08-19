@@ -42,7 +42,6 @@ export default function Home() {
       pathname: '/batch',
       query: { selectedItem: item },
     });    
-   console.log('Encoded Item:', item);
 };
 
   return (

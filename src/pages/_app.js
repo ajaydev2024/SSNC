@@ -4,6 +4,8 @@ import { Analytics } from '@vercel/analytics/react';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { BrandProvider } from '@/components/BrandContext';
+import { InventoryProvider } from '@/components/InventoryContext';
+
 
 
 export default function App({ Component, pageProps }) {
@@ -15,9 +17,11 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <BrandProvider>
-        <Component {...pageProps} />
-      </BrandProvider>
+      <InventoryProvider>
+        <BrandProvider>
+          <Component {...pageProps} />
+        </BrandProvider>
+      </InventoryProvider>
       <Analytics />
 
     </>

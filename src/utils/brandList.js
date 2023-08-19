@@ -1,48 +1,48 @@
 const brands = [
     {
-        name: 'Dexter Black',
+        name: 'Black',
         imageSrc: '/images/DJBlack.png',
         altText: 'Dexter Series',
     },
     {
-        name: 'Dexter Gold',
+        name: 'Gold',
         imageSrc: '/images/DJGold.png',
         altText: 'Dexter Series',
     },
     {
-        name: 'Flex Wheeler',
+        name: 'Flex',
         imageSrc: '/images/Flex Wheeler Logo.png',
         altText: 'Flex Wheeler',
     },
    
     {
-        name: 'Hunter Pharma',
+        name: 'Hunter',
         imageSrc: '/images/HUntERPHRAMALOGO.png',
         altText: 'Hunter Pharma',
     },
      {
-        name: 'Jacks Nutrition',
+        name: 'Jacks',
         imageSrc: '/images/JacksLogo.png',
         altText: 'Jacks Nutrition',
     },
     {
-        name: 'Lazar Nutrition',
+        name: 'Lazar',
         imageSrc: '/images/LAZAR LOGO WHITE.png',
         altText: 'Lazar Nutrition',
     },
     {
-        name: 'Monster Labs',
+        name: 'Monster',
         imageSrc: '/images/MonsterLabsLogo.png',
         altText: 'Monster Labs',
     },
     {
-        name: 'Pole Nutrition',
+        name: 'Pole',
         imageSrc: '/images/Pole-Logo white.png',
         altText: 'Pole Nutrition',
     },
     
      {
-        name: 'Sunline Alaska',
+        name: 'Sunline',
         imageSrc: '/images/SunlineAlaskaLOGO.png',
         altText: 'Sunline Alaska',
     },

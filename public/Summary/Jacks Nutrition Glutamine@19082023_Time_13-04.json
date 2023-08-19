@@ -1,0 +1,101 @@
+{
+  "selectedItem": "Jacks Nutrition Glutamine.js",
+  "itemData": [
+    {
+      "name": "Beta Alanine",
+      "servings": 20
+    },
+    {
+      "name": "Vit C",
+      "servings": 0.15
+    },
+    {
+      "name": "Taurine",
+      "servings": 11
+    },
+    {
+      "name": "Calcium Silicate",
+      "servings": 0.03
+    },
+    {
+      "name": "Silicon Dioxide",
+      "servings": 0.04
+    },
+    {
+      "name": "Sucralose",
+      "servings": 0.1
+    },
+    {
+      "name": "Ace K",
+      "servings": 10.05
+    },
+    {
+      "name": "Color",
+      "servings": 0.001
+    },
+    {
+      "PackagingName": "19 oz Pet Black Bottle"
+    },
+    {
+      "PackagingName": "01 Silica (10gm)"
+    },
+    {
+      "PackagingName": "Scoop 7.5cc"
+    },
+    {
+      "PackagingName": "89mm Pole Cap"
+    },
+    {
+      "PackagingName": "Carton 19oz - 12pk"
+    }
+  ],
+  "totalServings": 41.371,
+  "boxes": "240",
+  "batch1": "12",
+  "batch2": "10",
+  "batch3": "10",
+  "boxElements": [
+    "29.01",
+    "0.22",
+    "15.95",
+    "0.04",
+    "0.06",
+    "0.15",
+    "14.58",
+    "0.00"
+  ],
+  "batch1Elements": [
+    "5.80",
+    "0.04",
+    "3.19",
+    "0.01",
+    "0.01",
+    "0.03",
+    "2.92",
+    "0.00"
+  ],
+  "batch2Elements": [
+    "4.83",
+    "0.04",
+    "2.66",
+    "0.01",
+    "0.01",
+    "0.02",
+    "2.43",
+    "0.00"
+  ],
+  "batch3Elements": [
+    "4.83",
+    "0.04",
+    "2.66",
+    "0.01",
+    "0.01",
+    "0.02",
+    "2.43",
+    "0.00"
+  ],
+  "totalBoxElements": "60.00",
+  "totalBatch1Elements": "12.00",
+  "totalBatch2Elements": "10.00",
+  "totalBatch3Elements": "10.00"
+}
