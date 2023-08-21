@@ -13,7 +13,6 @@ const Batch = ({ itemData }) => {
   const router = useRouter();
   let { selectedItem } = router.query;
   selectedItem = decodeURIComponent(selectedItem);
-  console.log("itemData :::",itemData);
   const { state, dispatch } = useInventory();
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
@@ -32,19 +31,20 @@ const Batch = ({ itemData }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (itemData) {
-      const totalServingsValue = itemData
-        .filter(item => !item.PackagingName)
-        .reduce((total, item) => total + item.servings, 0);
+    if (itemData && itemData[1]) {
+      const totalServingsValue = Object.values(itemData[1])      
+        .reduce((total, key) => total + itemData[1][key], 0);
       setTotalServings(totalServingsValue);
       calculateNoOfBoxes(parseFloat(boxes), totalServingsValue);
       calculateBatch1(parseFloat(batch1), totalServingsValue);
       calculateBatch2(parseFloat(batch2), totalServingsValue);
       calculateBatch3(parseFloat(batch3), totalServingsValue);
+      console.log(totalServings)
     }
     setLoading(false);
 
-  }, [boxes, batch1, batch2, batch3,]);
+}, [itemData, boxes, batch1, batch2, batch3]);
+
 
   function validateNumber(value) {
     return !isNaN(value) && value >= 0;
@@ -188,98 +188,92 @@ const Batch = ({ itemData }) => {
         {selectedItem && (
           <h1 className='text-center text-white pb-4'>Product Details of {selectedItem.substr(0, selectedItem.length - 3)}</h1>
         )}
-        {loading || itemData   === null ? ( // Show loading icon only when loading and no data
-          <Loading /> // Your loading component
+        {loading || itemData[0]["Weight"] === null ? (
+          <Loading />
         ) : itemData[1] ? (
           <div className='table-responsive'>
-            <table className='table' >
-              <thead>
-                <tr >
-                  <th className='pb-4'>Material</th>
-                  <th className='pb-4'>Servings (in Grams)</th>
-                  <th className='pb-4'>
-                    <input
-                      className='outline-none text-center'
-                      type='number'
-                      placeholder='Enter No of Boxes'
-                      value={boxes}
-                      onChange={(e) => {
-                        if (validateNumber(e.target.value)) {
-                          setBoxes(e.target.value);
-                        }
-                      }}
-                    />
-                  </th>
-                  <th className='pb-4'>
-                    <input
-                      className='outline-none text-center'
-                      type='number'
-                      placeholder='Enter Batch (in Kg)'
-                      value={batch1}
-                      onChange={(e) => {
-                        if (validateNumber(e.target.value)) {
-                          setBatch1(e.target.value);
-                        }
-                      }}
-                    />
-                  </th>
-                  <th className='pb-4'>
-                    <input
-                      className='outline-none text-center'
-                      type='number'
-                      placeholder='Enter Batch (in Kg)'
-                      value={batch2}
-                      onChange={(e) => {
-                        if (validateNumber(e.target.value)) {
-                          setBatch2(e.target.value);
-                        }
-                      }}
-                    />
-                  </th>
-                  <th className='pb-4'>
-                    <input
-                      className='outline-none text-center'
-                      type='number'
-                      placeholder='Enter Batch (in Kg)'
-                      value={batch3}
-                      onChange={(e) => {
-                        if (validateNumber(e.target.value)) {
-                          setBatch3(e.target.value);
-                        }
-                      }}
-                    />
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {itemData[1].map((item, index) => {
-                  if (item.PackagingName) {
-                    return null;
-                  }
-                  return (
+            {itemData[1] && typeof itemData[1] === 'object' && (
+              <table className='table'>
+                <thead>
+                  <tr>
+                    <th className='pb-4'>Material</th>
+                    <th className='pb-4'>Servings (in Grams)</th>
+                    <th className='pb-4'>
+                      <input
+                        className='outline-none text-center'
+                        type='number'
+                        placeholder='Enter No of Boxes'
+                        value={boxes}
+                        onChange={(e) => {
+                          if (validateNumber(e.target.value)) {
+                            setBoxes(e.target.value);
+                          }
+                        }}
+                      />
+                    </th>
+                    <th className='pb-4'>
+                      <input
+                        className='outline-none text-center'
+                        type='number'
+                        placeholder='Enter Batch (in Kg)'
+                        value={batch1}
+                        onChange={(e) => {
+                          if (validateNumber(e.target.value)) {
+                            setBatch1(e.target.value);
+                          }
+                        }}
+                      />
+                    </th>
+                    <th className='pb-4'>
+                      <input
+                        className='outline-none text-center'
+                        type='number'
+                        placeholder='Enter Batch (in Kg)'
+                        value={batch2}
+                        onChange={(e) => {
+                          if (validateNumber(e.target.value)) {
+                            setBatch2(e.target.value);
+                          }
+                        }}
+                      />
+                    </th>
+                    <th className='pb-4'>
+                      <input
+                        className='outline-none text-center'
+                        type='number'
+                        placeholder='Enter Batch (in Kg)'
+                        value={batch3}
+                        onChange={(e) => {
+                          if (validateNumber(e.target.value)) {
+                            setBatch3(e.target.value);
+                          }
+                        }}
+                      />
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {Object.keys(itemData[1]).map((key, index) => (
                     <tr key={index}>
-                      <td >{item.name}</td>
-                      <td className='pb-4 '>{item.servings}</td>
+                      <td className='pb-4'>{key}</td>
+                      <td className='pb-4'>{itemData[1][key]}</td>
                       <td className='pb-4 '>{boxElements[index]}</td>
                       <td className='pb-4'>{batch1Elements[index]}</td>
                       <td className='pb-4'>{batch2Elements[index]}</td>
                       <td className='pb-4'>{batch3Elements[index]}</td>
                     </tr>
-
-                  );
-                })}
-
-                <tr className=' text-green-500 text-3xl font-extrabold'>
-                  <td className='pb-4'>Total :</td>
-                  <td className='pb-4'>{totalServings.toFixed(2)}</td>
-                  <td className='pb-4'>{totalBoxElements}</td>
-                  <td className='pb-4'>{totalBatch1Elements}</td>
-                  <td className='pb-4'>{totalBatch2Elements}</td>
-                  <td className='pb-4'>{totalBatch3Elements}</td>
-                </tr>
-              </tbody>
-            </table>
-
+                  ))}
+                  <tr className='text-green-500 text-3xl font-extrabold'>
+                    <td className='pb-4'>Total :</td>
+                    <td className='pb-4'>{totalServings.toFixed(2)}</td>
+                    <td className='pb-4'>{totalBoxElements}</td>
+                    <td className='pb-4'>{totalBatch1Elements}</td>
+                    <td className='pb-4'>{totalBatch2Elements}</td>
+                    <td className='pb-4'>{totalBatch3Elements}</td>
+                  </tr>
+                </tbody>
+              </table>
+            )}
             <table className='w-1/3 pb-4'>
               <thead>
                 <tr className='pb-4'>
@@ -288,34 +282,22 @@ const Batch = ({ itemData }) => {
                 </tr>
               </thead>
               <tbody>
-                {/* Product Items */}
-                {itemData[2].map((item, index) => {
-                  if (item.name) {
-                    return null;
-                  }
-                  return (
+                {itemData[2] && typeof itemData[2] === 'object' && (
+                  Object.keys(itemData[2]).map((key, index) => (
                     <tr key={index}>
-                      <td className='pb-4'>{item.PackagingName}</td>
-
-                      {item.PackagingName === 'Carton 19oz - 12pk' ? (
-                        <td className='text-center'>
-                          {boxes || batch1 || batch2 || batch3 ? (parseFloat(boxes || batch1 || batch2 || batch3) / 12).toFixed(1) : ''}
-                        </td>
-
-                      ) : (
-                        <td className='text-center'>{boxes || batch1 || batch2 || batch3}</td>
-                      )}
+                      <td className='pb-4'>{key}</td>
+                      <td className='pb-4'>
+                        {boxes || batch1 || batch2 || batch3 ? (parseFloat(boxes || batch1 || batch2 || batch3) / 12).toFixed(1) : ''}
+                      </td>
                     </tr>
-                  );
-                })}
+                  ))
+                )}
               </tbody>
             </table>
-            {/* <ExcelExportButton sheets={sheets} />*/}
           </div>
         ) : (
           <p className='text-center'>No data available</p>
         )}
-
       </div>
       <button onClick={handleSaveToJson}
         className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
@@ -327,14 +309,18 @@ const Batch = ({ itemData }) => {
         <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
         <span>export to PDF</span>
       </button>
+    </div>
 
-    </div>);
+  );
 };
 export async function getServerSideProps(context) {
   const { selectedItem } = context.query;
 
+  // Decode the selectedItem value
+  const decodedSelectedItem = decodeURIComponent(selectedItem);
+
   try {
-    const itemData = await DataFetcher(context, selectedItem);
+    const itemData = await DataFetcher(decodedSelectedItem);
 
     return {
       props: {
@@ -350,6 +336,7 @@ export async function getServerSideProps(context) {
     };
   }
 }
+
 export default Batch;
 
 export const metadata = {
