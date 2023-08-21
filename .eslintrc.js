@@ -23,18 +23,14 @@ module.exports = {
     },
     plugins: ['react', 'node'], // Make sure 'node' is listed as a plugin
     rules: {
-        // ... other rules
-        'react/react-in-jsx-scope': 'off', // Disable React scope rule
-        'react/prop-types': 'off', // Disable prop-types validation for now
-        'node/no-template-curly-in-string': 'off', 
         "react/no-unescaped-entities": "off",
         "@next/next/no-page-custom-font": "off"
 
-      },
-      settings: {
+    },
+    settings: {
         react: {
-          version: 'detect'
+            version: 'detect'
         }
-      },
-      
+    },
+
 }
