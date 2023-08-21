@@ -4,7 +4,7 @@ import fs from 'fs';
 import path from 'path';
 
 export default function handler(req, res) {
-  const dirPath = path.join(process.cwd(), '/src/JSONData/ProductList');
+  const dirPath = path.join(process.cwd(), '/JSONData/ProductList');
 
   fs.readdir(dirPath, (err, files) => {
     if (err) {

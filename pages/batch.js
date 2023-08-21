@@ -13,7 +13,7 @@ const Batch = ({ itemData }) => {
   const router = useRouter();
   let { selectedItem } = router.query;
   selectedItem = decodeURIComponent(selectedItem);
-  const { state, dispatch } = useInventory();
+ // const { state, dispatch } = useInventory();
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
   const [Addboxes1, setAddboxes1] = useState('')
@@ -137,7 +137,7 @@ const Batch = ({ itemData }) => {
     } catch (error) {
       console.error('Error saving data:', error);
     }
-    dispatch({ type: 'DEDUCT_ITEM', payload: dataToSave });
+  //  dispatch({ type: 'DEDUCT_ITEM', payload: dataToSave });
 
   };
 
@@ -186,11 +186,11 @@ const Batch = ({ itemData }) => {
       <Navbar />
       <div id='batch' className='mx-2' ref={contentRef}>
         {selectedItem && (
-          <h1 className='text-center text-white pb-4'>Product Details of {selectedItem.substr(0, selectedItem.length - 3)}</h1>
+          <h1 className='text-center text-white pb-4'>Product Details of {selectedItem } {(itemData[0]["Weight"])/1000 } Kg </h1>
         )}
         {loading || itemData[0]["Weight"] === null ? (
           <Loading />
-        ) : itemData[1] ? (
+        ) : itemData[1] ? ( 
           <div className='table-responsive'>
             {itemData[1] && typeof itemData[1] === 'object' && (
               <table className='table'>
@@ -315,10 +315,11 @@ const Batch = ({ itemData }) => {
 };
 export async function getServerSideProps(context) {
   const { selectedItem } = context.query;
+  console.log("selectedItem",selectedItem)
 
-  // Decode the selectedItem value
-  const decodedSelectedItem = decodeURIComponent(selectedItem);
-
+  // Decode the selectedItem values
+  const decodedSelectedItem = decodeURIComponent(selectedItem); // Remove .json
+  console.log("decodedSelectedItem",decodedSelectedItem)
   try {
     const itemData = await DataFetcher(decodedSelectedItem);
 

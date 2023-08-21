@@ -3,7 +3,7 @@
 import fs from 'fs';
 import path from 'path';
 
-const dataDirectory = path.join(process.cwd(), '/public/files');
+const dataDirectory = path.join(process.cwd(), '/public/Summary');
 
 export default function handler(req, res) {
   const { itemName } = req.query;

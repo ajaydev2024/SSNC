@@ -21,11 +21,11 @@ module.exports = {
         "ecmaVersion": "latest",
         "sourceType": "module"
     },
-    plugins: ['react', 'node'], // Make sure 'node' is listed as a plugin
+    plugins: ['react', 'node'], 
     rules: {
         "react/no-unescaped-entities": "off",
         "@next/next/no-page-custom-font": "off"
-
+        "node/no-template-curly-in-string": ["error", { "allowSimple": true }],
     },
     settings: {
         react: {

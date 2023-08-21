@@ -2,8 +2,10 @@ import React, { useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import { readdir, readFile, stat } from 'fs/promises';
 import { join, extname } from 'path';
+import readFile from '@/utils/readFileforBatch';
 
-const Summary = ({ jsonData }) => {
+const Summary = ({ jsonItem }) => {
+  console.log("Summary.js : ",jsonItem)
   useEffect(() => {
     const container = document.querySelector('.accordion-container');
     const toggleAccordion = (event) => {
@@ -30,10 +32,10 @@ const Summary = ({ jsonData }) => {
       <Navbar />
       <h1 className="text-center text-2xl">Summary Page of Every Item</h1>
       <div className="accordion-container">
-        {jsonData.map((jsonItem, index) => (
-          <div className="list-decimal" key={index}>
+    {  Object.keys(jsonItem[0]).map((key, index) => (         
+         <div className="list-decimal" key={index}>
             <button className="accordion cursor-pointer rounded-lg font-bold">
-              {jsonItem.fileName}
+              {jsonItem[0]["Weight"]}
             </button>
             <div className="panel">
               <div className="table-responsive">
@@ -61,7 +63,7 @@ const Summary = ({ jsonData }) => {
                     ))}
                     <tr className="text-green-500 text-3xl font-extrabold">
                       <td>Total :</td>
-                      <td>{jsonItem.totalServings.toFixed(2)}</td>
+                      <td>{jsonItem.totalServings}</td>
                       <td>{jsonItem.totalBoxElements}</td>
                       <td>{jsonItem.totalBatch1Elements}</td>
                       <td>{jsonItem.totalBatch2Elements}</td>

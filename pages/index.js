@@ -37,12 +37,15 @@ export default function Home() {
   }, [searchQuery, selectedBrand]);
 
   const handleItemClick = (item) => {
-    setSearchQuery(item.slice(0, item.length - 3));
+    const itemNameWithoutExtension = item.slice(0, item.length - 5); // Remove .json
+    setSearchQuery(itemNameWithoutExtension);
     router.push({
       pathname: '/batch',
-      query: { selectedItem: item },
-    });    
-};
+      query: { selectedItem: itemNameWithoutExtension },
+    });
+  };
+   
+
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-2">
@@ -67,7 +70,7 @@ export default function Home() {
                   key={index}
                   onClick={() => handleItemClick(encodeURIComponent(fileName))} // Encode the filename
                 >
-                  {fileName.slice(0, fileName.length - 3)}
+                  {fileName.slice(0, fileName.length - 5)}
                 </li>
               );
             })}

@@ -81,7 +81,7 @@ const InventoryItems = ({ itemData }) => {
 
 export async function getServerSideProps(context) {
     try {
-        const dirPath = join(process.cwd(), 'src', 'JSONData', 'InventoryList');
+        const dirPath = join(process.cwd(), 'JSONData', 'InventoryList');
         const fileNames = await readdir(dirPath);
 
         const fileStatsPromises = fileNames.map(async (fileName) => {

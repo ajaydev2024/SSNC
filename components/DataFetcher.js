@@ -2,12 +2,14 @@ import path from 'path';
 import readJSFile from '@/utils/readFileforBatch';
 
 async function DataFetcher(selectedItem) {
+  console.log("data fecther.js : ", selectedItem)
+
   if (!selectedItem) {
     return null;
   }
 
   try {
-    const filePath = path.join(process.cwd(), 'src', 'JSONData', 'ProductList', `${selectedItem}`);
+    const filePath = path.join(process.cwd(), 'JSONData', 'ProductList', `${selectedItem}.json`);
 
     const fileContent = await readJSFile(filePath);
 
@@ -15,7 +17,7 @@ async function DataFetcher(selectedItem) {
 
     return Array.isArray(selectedItemData) && selectedItemData.length > 0 ? selectedItemData : null;
   } catch (error) {
-    console.error('Error fetching item data:', error);
+    console.error('Error fetching item data by datafetcher.js :', error);
     return null;
   }
 }
