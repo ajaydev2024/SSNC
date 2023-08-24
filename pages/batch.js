@@ -13,48 +13,52 @@ const Batch = ({ itemData }) => {
   const router = useRouter();
   let { selectedItem } = router.query;
   selectedItem = decodeURIComponent(selectedItem);
- // const { state, dispatch } = useInventory();
+  // const { state, dispatch } = useInventory();
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
   const [Addboxes1, setAddboxes1] = useState('')
-  const [boxElements, setBoxElements] = useState([]);
+  const [boxElements, setBoxElements] = useState({});
   const [totalBoxElements, setTotalBoxElements] = useState(0);
   const [batch1, setBatch1] = useState('');
-  const [batch1Elements, setBatch1Elements] = useState([]);
+  const [batch1Elements, setBatch1Elements] = useState({});
   const [totalBatch1Elements, setTotalBatch1Elements] = useState(0);
   const [batch2, setBatch2] = useState('');
-  const [batch2Elements, setBatch2Elements] = useState([]);
+  const [batch2Elements, setBatch2Elements] = useState({});
   const [totalBatch2Elements, setTotalBatch2Elements] = useState(0);
   const [batch3, setBatch3] = useState('');
-  const [batch3Elements, setBatch3Elements] = useState([]);
+  const [batch3Elements, setBatch3Elements] = useState({});
   const [totalBatch3Elements, setTotalBatch3Elements] = useState(0);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (itemData && itemData[1]) {
-      const totalServingsValue = Object.values(itemData[1])      
-        .reduce((total, key) => total + itemData[1][key], 0);
+    if (itemData[0] && itemData[1]) {
+      let totalServingsValue = 0;
+      Object.values(itemData[1]).forEach(value => {
+        totalServingsValue += value;
+      })
       setTotalServings(totalServingsValue);
-      calculateNoOfBoxes(parseFloat(boxes), totalServingsValue);
-      calculateBatch1(parseFloat(batch1), totalServingsValue);
-      calculateBatch2(parseFloat(batch2), totalServingsValue);
-      calculateBatch3(parseFloat(batch3), totalServingsValue);
-      console.log(totalServings)
+      calculateNoOfBoxes(itemData, parseFloat(boxes), totalServingsValue);
+      calculateBatch1(itemData, parseFloat(batch1), totalServingsValue);
+      calculateBatch2(itemData, parseFloat(batch2), totalServingsValue);
+      calculateBatch3(itemData, parseFloat(batch3), totalServingsValue);
     }
     setLoading(false);
-
-}, [itemData, boxes, batch1, batch2, batch3]);
-
+  }, [itemData, boxes, batch1, batch2, batch3]);
 
   function validateNumber(value) {
     return !isNaN(value) && value >= 0;
   }
 
-  function calculateNoOfBoxes(boxesValue, totalServingsValue) {
+  function calculateNoOfBoxes(itemData, boxesValue, totalServingsValue) {
     if (validateNumber(boxesValue)) {
-      const newBoxElements = itemData
-        .filter(item => !item.PackagingName)
-        .map(item => ((item.servings / totalServingsValue) * boxesValue * 250) / 1000);
+      const newBoxElements = [];
+
+      Object.values(itemData[1]).forEach(value => {
+        if (validateNumber(value)) {
+          const calculatedValue = ((value / totalServingsValue) * boxesValue * itemData[0]["Weight"]) / 1000;
+          newBoxElements.push(calculatedValue);
+        }
+      });
       setBoxElements(newBoxElements.map(value => value.toFixed(2)));
       setTotalBoxElements(newBoxElements.reduce((total, item) => total + item, 0).toFixed(2));
     } else {
@@ -63,11 +67,16 @@ const Batch = ({ itemData }) => {
     }
   }
 
-  function calculateBatch1(batchValue, totalServingsValue) {
+  function calculateBatch1(itemData, batchValue, totalServingsValue) {
     if (validateNumber(batchValue)) {
-      const newBatch1Elements = itemData
-        .filter(item => !item.PackagingName)
-        .map(item => (batchValue / totalServingsValue) * item.servings);
+      const newBatch1Elements = [];
+      Object.values(itemData[1]).forEach(value => {
+        if (validateNumber(value)) {
+          const calculatedValue = (batchValue / totalServingsValue) * value;
+          newBatch1Elements.push(calculatedValue);
+        }
+      });
+
       setBatch1Elements(newBatch1Elements.map(value => value.toFixed(2)));
       setTotalBatch1Elements(newBatch1Elements.reduce((total, item) => total + item, 0).toFixed(2));
     } else {
@@ -76,11 +85,15 @@ const Batch = ({ itemData }) => {
     }
   }
 
-  function calculateBatch2(batchValue, totalServingsValue) {
+  function calculateBatch2(itemData,batchValue, totalServingsValue) {
     if (validateNumber(batchValue)) {
-      const newBatch2Elements = itemData
-        .filter(item => !item.PackagingName)
-        .map(item => (batchValue / totalServingsValue) * item.servings);
+      const newBatch2Elements = [];
+      Object.values(itemData[1]).forEach(value => {
+        if (validateNumber(value)) {
+          const calculatedValue = (batchValue / totalServingsValue) * value;
+          newBatch2Elements.push(calculatedValue);
+        }
+      });
       setBatch2Elements(newBatch2Elements.map(value => value.toFixed(2)));
       setTotalBatch2Elements(newBatch2Elements.reduce((total, item) => total + item, 0).toFixed(2));
     } else {
@@ -89,11 +102,15 @@ const Batch = ({ itemData }) => {
     }
   }
 
-  function calculateBatch3(batchValue, totalServingsValue) {
+  function calculateBatch3(itemData,batchValue, totalServingsValue) {
     if (validateNumber(batchValue)) {
-      const newBatch3Elements = itemData
-        .filter(item => !item.PackagingName)
-        .map(item => (batchValue / totalServingsValue) * item.servings);
+      const newBatch3Elements = [];
+      Object.values(itemData[1]).forEach(value => {
+        if (validateNumber(value)) {
+          const calculatedValue = (batchValue / totalServingsValue) * value;
+          newBatch3Elements.push(calculatedValue);
+        }
+      });
       setBatch3Elements(newBatch3Elements.map(value => value.toFixed(2)));
       setTotalBatch3Elements(newBatch3Elements.reduce((total, item) => total + item, 0).toFixed(2));
     } else {
@@ -137,7 +154,7 @@ const Batch = ({ itemData }) => {
     } catch (error) {
       console.error('Error saving data:', error);
     }
-  //  dispatch({ type: 'DEDUCT_ITEM', payload: dataToSave });
+    //  dispatch({ type: 'DEDUCT_ITEM', payload: dataToSave });
 
   };
 
@@ -186,11 +203,11 @@ const Batch = ({ itemData }) => {
       <Navbar />
       <div id='batch' className='mx-2' ref={contentRef}>
         {selectedItem && (
-          <h1 className='text-center text-white pb-4'>Product Details of {selectedItem } {(itemData[0]["Weight"])/1000 } Kg </h1>
+          <h1 className='text-center text-white pb-4'>Product Details of {selectedItem} {(itemData[0]["Weight"]) / 1000} Kg </h1>
         )}
         {loading || itemData[0]["Weight"] === null ? (
           <Loading />
-        ) : itemData[1] ? ( 
+        ) : itemData[1] ? (
           <div className='table-responsive'>
             {itemData[1] && typeof itemData[1] === 'object' && (
               <table className='table'>
@@ -315,11 +332,11 @@ const Batch = ({ itemData }) => {
 };
 export async function getServerSideProps(context) {
   const { selectedItem } = context.query;
-  console.log("selectedItem",selectedItem)
+  console.log("selectedItem", selectedItem)
 
   // Decode the selectedItem values
   const decodedSelectedItem = decodeURIComponent(selectedItem); // Remove .json
-  console.log("decodedSelectedItem",decodedSelectedItem)
+  console.log("decodedSelectedItem", decodedSelectedItem)
   try {
     const itemData = await DataFetcher(decodedSelectedItem);
 

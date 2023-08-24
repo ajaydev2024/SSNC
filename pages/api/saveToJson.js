@@ -14,7 +14,7 @@ export default async function saveToJson(req, res) {
     const hour = now.getHours().toString().padStart(2, '0');
     const minute = now.getMinutes().toString().padStart(2, '0');
     
-    const fileName = `${selectedItem.substr(0, selectedItem.length - 3)}@${day}${month}${year}_Time_${hour}-${minute}.json`;
+    const fileName = `${selectedItem}@${day}${month}${year}_Time_${hour}-${minute}.json`;
 
     const filePath = path.join(process.cwd(), 'public', 'Summary', fileName);
 

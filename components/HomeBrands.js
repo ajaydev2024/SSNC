@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import brands from '@/utils/brandList';
+import brands from '@/pages/api/brandList';
 import { useBrandContext } from '@/components/BrandContext';
 
 

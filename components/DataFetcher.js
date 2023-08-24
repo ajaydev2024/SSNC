@@ -1,5 +1,5 @@
 import path from 'path';
-import readJSFile from '@/utils/readFileforBatch';
+import readJSFile from '@/pages/api/getBatchData';
 
 async function DataFetcher(selectedItem) {
   console.log("data fecther.js : ", selectedItem)
