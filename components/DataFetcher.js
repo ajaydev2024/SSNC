@@ -2,7 +2,6 @@ import path from 'path';
 import readJSFile from '@/pages/api/getBatchData';
 
 async function DataFetcher(selectedItem) {
-  console.log("data fecther.js : ", selectedItem)
 
   if (!selectedItem) {
     return null;

@@ -1,81 +1,71 @@
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
+import Collapse from 'react-collapse';
+import Navbar from '@/components/Navbar';
 import { readdir, readFile, stat } from 'fs/promises';
 import { join, extname } from 'path';
-import Navbar from '@/components/Navbar';
-import ExcelExportButton from './api/ExcelExportButton';
-import { useInventory } from '@/components/InventoryContext';
-
 
 const InventoryItems = ({ itemData }) => {
-    const { state } = useInventory();
-    const { inventory } = state;
- 
-    useEffect(() => {
-        const container = document.querySelector('.accordion-container');
-        const toggleAccordion = (event) => {
-            const accordionButton = event.target.closest('.accordion');
-            if (accordionButton) {
-                accordionButton.classList.toggle('active');
-                const panel = accordionButton.nextElementSibling;
-                if (panel.style.maxHeight) {
-                    panel.style.maxHeight = null;
-                } else {
-                    panel.style.maxHeight = panel.scrollHeight + 'px';
-                }
-            }
-        };
+    const [items, setItems] = useState(itemData);
 
-        container.addEventListener('click', toggleAccordion);
-
-        return () => {
-            container.removeEventListener('click', toggleAccordion);
-        };
-    }, []);
-    const sheets = itemData.map(item => ({ sheetName: item.title, data: item.materials.filter(material => material.value !== null), }));
+    const toggleAccordion = (index) => {
+        setItems((prevItems) =>
+            prevItems.map((item, idx) => ({
+                ...item,
+                isOpen: idx === index ? !item.isOpen : false,
+            }))
+        );
+    };
 
     return (
-        <div id='inventoryPage'>
-            <Navbar />
-            <h1 className='text-center text-2xl'>All Inventory List</h1>
-            <div className="accordion-container">
-                {itemData.length > 0 && (
-                    <div className="list-decimal text-center bg-white rounded-lg mt-8 p-4 ">
-                        {itemData.map((item, index) => (
-                            <div className='list-decimal' key={index}>
-                                <button className="accordion cursor-pointer rounded-lg font-bold">
-                                    {index + 1}): {item.title}
-                                </button>
-                                <div className="panel">
-
-                                    <div className="table-responsive">
-                                        <table className='table'>
-                                            <thead>
-                                                <tr>
-                                                    <th>Material</th>
-                                                    <th>Quantity</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {item.materials.map((material, i) => (
-                                                    material.value !== null && (
-                                                        <tr key={i}>
-                                                            <td>{material.name}</td>
-                                                            <td>{material.value}</td>
+        <>
+            <div id='inventoryPage'>
+                <Navbar />
+                <h1 className='text-center text-2xl'>All Inventory List</h1>
+                <div className='accordion-container'>
+                    {items.length > 0 && (
+                        <div className='list-decimal text-center bg-white rounded-lg mt-8 p-4 '>
+                            {items.map((item, index) => (
+                                <div className='list-decimal' key={index}>
+                                    <button
+                                        onClick={() => toggleAccordion(index)}
+                                        className='accordion cursor-pointer rounded-lg font-bold'
+                                    >
+                                        {index + 1}): {item.title}
+                                    </button>
+                                    <Collapse isOpened={item.isOpen}>
+                                        <div className='panel'>
+                                            <div className='table-responsive'>
+                                                <table className='table'>
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Material</th>
+                                                            <th>Quantity</th>
                                                         </tr>
-                                                    )
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
+                                                    </thead>
+                                                    <tbody>
+                                                    {Object.keys(item).map((key, index) => {
+                                                            if (key !== 'fileName' && key !== 'title' && key !== 'birthDate' && key !== 'isOpen') {
+                                                                return (
+                                                                    <tr key={index}>
+                                                                        <td>{key}</td>
+                                                                        <td>{item[key]}</td>
+                                                                    </tr>
+                                                                );
+                                                            }
+                                                            return null;
+                                                        })}
+                                                        </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </Collapse>
                                 </div>
-                            </div>
-                        ))}
-                    </div>
-                )}
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
-            <ExcelExportButton sheets={sheets} />
-
-        </div>
+        </>
     );
 };
 
@@ -101,31 +91,30 @@ export async function getServerSideProps(context) {
 
         const fileStats = await Promise.all(fileStatsPromises);
 
-        const validJsonFileContents = fileStats
-            .filter(content => content !== null)
-            .sort((a, b) => a.stat.birthtimeMs - b.stat.birthtimeMs) // Sort by creation date
-            .map(async content => {
-                const { fileName } = content;
-                const filePath = join(dirPath, fileName);
-                try {
-                    const contentBuffer = await readFile(filePath);
-                    const contentString = contentBuffer.toString(); // Convert buffer to string
-                    const parsedContent = JSON.parse(contentString);
-                    const materials = Object.entries(parsedContent)
-                        .filter(([key, value]) => key !== 'title')
-                        .map(([name, value]) => ({ name, value }));
-                    return { title: parsedContent.title, materials };
-                } catch (readError) {
-                    console.error(`Error reading or parsing file ${fileName}:`, readError);
-                    return null;
-                }
-            });
+        const validJsonFileContents = await Promise.all(
+            fileStats
+                .filter((content) => content !== null)
+                .map(async (content) => {
+                    const { fileName } = content;
+                    const filePath = join(dirPath, fileName);
+                    try {
+                        const contentBuffer = await readFile(filePath); // Add this line
+                        const parsedContent = JSON.parse(contentBuffer);
+                        return { fileName, ...parsedContent, birthDate: content.stat.birthtimeMs };
+                    } catch (readError) {
+                        console.error(`Error reading or parsing file ${fileName}:`, readError);
+                        return null;
+                    }
+                })
+        );
 
-        const validJsonFileContentsResolved = await Promise.all(validJsonFileContents);
+        // Filter out null contents
+        const filteredContents = validJsonFileContents.filter((content) => content !== null);
+        const sortedContents = filteredContents.sort((a, b) => a.birthDate - b.birthDate);
 
         return {
             props: {
-                itemData: validJsonFileContentsResolved.filter(content => content !== null),
+                itemData: sortedContents,
             },
         };
     } catch (error) {

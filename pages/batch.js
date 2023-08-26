@@ -5,7 +5,6 @@ import DataFetcher from '@/components/DataFetcher'; // Adjust the path as needed
 import { useRouter } from 'next/router';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
-import { useInventory } from '@/components/InventoryContext';
 
 
 const Batch = ({ itemData }) => {
@@ -13,10 +12,8 @@ const Batch = ({ itemData }) => {
   const router = useRouter();
   let { selectedItem } = router.query;
   selectedItem = decodeURIComponent(selectedItem);
-  // const { state, dispatch } = useInventory();
   const [totalServings, setTotalServings] = useState(0);
   const [boxes, setBoxes] = useState('');
-  const [Addboxes1, setAddboxes1] = useState('')
   const [boxElements, setBoxElements] = useState({});
   const [totalBoxElements, setTotalBoxElements] = useState(0);
   const [batch1, setBatch1] = useState('');
@@ -199,6 +196,7 @@ const Batch = ({ itemData }) => {
     });
   };
   return (
+    <>
     <div id='inventoryPage'>
       <Navbar />
       <div id='batch' className='mx-2' ref={contentRef}>
@@ -313,10 +311,12 @@ const Batch = ({ itemData }) => {
             </table>
           </div>
         ) : (
-          <p className='text-center'>No data available</p>
+          <p className='text-center'>No data available 
+          <Link href='/'> Go To Home</Link>
+          </p>
         )}
       </div>
-
+      </div>
       <button onClick={handleSaveToJson}
         className="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
         data-ripple-light="true">
@@ -332,7 +332,7 @@ const Batch = ({ itemData }) => {
         <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
       </button>
-    </div>
+   </>
 
   );
 };

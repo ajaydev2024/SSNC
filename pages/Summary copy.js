@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import Collapse from 'react-collapse';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import axios from 'axios'; // Import Axios for making API requests
+
 
 const Summary = () => {
   const [summaryItems, setSummaryItems] = useState([]);
@@ -10,11 +10,7 @@ const Summary = () => {
     // Fetch summary data from the API route
     axios.get('/api/getSummaryData')
       .then(response => {
-        const initialSummaryItems = response.data.map(item => ({
-          ...item,
-          isOpen: false // Add an isOpen property to each item
-        }));
-        setSummaryItems(initialSummaryItems);
+        setSummaryItems(response.data);
       })
       .catch(error => {
         console.error('Error fetching summary data:', error);
@@ -30,23 +26,22 @@ const Summary = () => {
       return updatedSummaryItems;
     });
   };
-
-
+  
   return (
     <div id="batch">
       <Navbar />
+      
       <h1 className="text-center text-2xl">Summary Page of Every Item</h1>
-      <div className="accordion-container">
-      {summaryItems.map((jsonItem, index) => (
-        <div className="list-decimal">
-          <button
-              onClick={() => toggleAccordion(index)}
-              className="accordion cursor-pointer rounded-lg font-bold"
-          >
-            {jsonItem.fileName}
-          </button>
-          <Collapse isOpened={jsonItem.isOpen}>
-          <div className="panel">
+      <div className="accordion-container" >
+        {summaryItems.map((jsonItem, index) => (
+          <div className="list-decimal" key={index}>
+            <button                
+            onClick={(event) => toggleAccordion(event, index)}
+            className="accordion cursor-pointer rounded-lg font-bold">
+              {jsonItem.fileName}
+            </button>
+            {jsonItem.isOpen && (
+            <div className="panel" style={{ maxHeight: 'none' }}>
                 <table className="table">
                   <thead>
                     <tr>
@@ -100,11 +95,12 @@ const Summary = () => {
                   </tbody>
                 </table>
             </div>
-          </Collapse>
-        </div>
+            )}
+          </div>
         ))}
       </div>
     </div>
+
   );
 };
 

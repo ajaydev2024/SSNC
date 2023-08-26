@@ -1,5 +1,5 @@
 {
-  "selectedItem": "Jacks Nutrition Glutamine",
+  "selectedItem": "Lazar Nutrition Pre-Workout",
   "itemData": [
     {
       "Weight": 100
@@ -23,52 +23,52 @@
     }
   ],
   "totalServings": 41.371,
-  "boxes": "12",
-  "batch1": "1",
-  "batch2": "1",
-  "batch3": "1",
+  "boxes": "1",
+  "batch1": "3",
+  "batch2": "4",
+  "batch3": "6",
   "boxElements": [
-    "0.58",
+    "0.05",
     "0.00",
-    "0.32",
+    "0.03",
     "0.00",
     "0.00",
     "0.00",
-    "0.29",
+    "0.02",
     "0.00"
   ],
   "batch1Elements": [
-    "0.48",
+    "1.45",
+    "0.01",
+    "0.80",
     "0.00",
-    "0.27",
     "0.00",
-    "0.00",
-    "0.00",
-    "0.24",
+    "0.01",
+    "0.73",
     "0.00"
   ],
   "batch2Elements": [
-    "0.48",
+    "1.93",
+    "0.01",
+    "1.06",
     "0.00",
-    "0.27",
     "0.00",
-    "0.00",
-    "0.00",
-    "0.24",
+    "0.01",
+    "0.97",
     "0.00"
   ],
   "batch3Elements": [
-    "0.48",
+    "2.90",
+    "0.02",
+    "1.60",
     "0.00",
-    "0.27",
-    "0.00",
-    "0.00",
-    "0.00",
-    "0.24",
+    "0.01",
+    "0.01",
+    "1.46",
     "0.00"
   ],
-  "totalBoxElements": "1.20",
-  "totalBatch1Elements": "1.00",
-  "totalBatch2Elements": "1.00",
-  "totalBatch3Elements": "1.00"
+  "totalBoxElements": "0.10",
+  "totalBatch1Elements": "3.00",
+  "totalBatch2Elements": "4.00",
+  "totalBatch3Elements": "6.00"
 }

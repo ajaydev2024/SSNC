@@ -16,7 +16,7 @@ const HomeBrands = () => {
         <section className="max-w-6xl mx-auto px-4 sm:px-6  py-4">
             <div className="text-center pb-2 mt-20 lg:mt-0 lg:px-4">
                 <h2 className="text-sm sm:text-sm md:text-md lg:text-2xl   font-bold text-blue-600">
-                    Click on Any Supplement Brands to Shows its Items
+                    Click on Brands to Proceed
                 </h2>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 2xl:grid-cols-9 gap-6">
