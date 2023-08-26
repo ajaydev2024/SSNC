@@ -85,7 +85,7 @@ const Batch = ({ itemData }) => {
     }
   }
 
-  function calculateBatch2(itemData,batchValue, totalServingsValue) {
+  function calculateBatch2(itemData, batchValue, totalServingsValue) {
     if (validateNumber(batchValue)) {
       const newBatch2Elements = [];
       Object.values(itemData[1]).forEach(value => {
@@ -102,7 +102,7 @@ const Batch = ({ itemData }) => {
     }
   }
 
-  function calculateBatch3(itemData,batchValue, totalServingsValue) {
+  function calculateBatch3(itemData, batchValue, totalServingsValue) {
     if (validateNumber(batchValue)) {
       const newBatch3Elements = [];
       Object.values(itemData[1]).forEach(value => {
@@ -316,15 +316,21 @@ const Batch = ({ itemData }) => {
           <p className='text-center'>No data available</p>
         )}
       </div>
+
       <button onClick={handleSaveToJson}
-        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
+        className="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        data-ripple-light="true">
+        <span>Save File to Server</span>
         <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
-        <span>Save File to Server & Deduct items From Main Inventory</span>
+
       </button>
       <button onClick={generatePdfWithWatermark}
-        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center">
-        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
+        className="middle none center mr-4 rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+        data-ripple-light="true">
         <span>export to PDF</span>
+
+        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+          <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" /></svg>
       </button>
     </div>
 

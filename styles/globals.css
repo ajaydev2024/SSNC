@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 
-@media (prefers-color-scheme: dark) {
   :root {
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
   }
-}
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -23,7 +22,7 @@ body {
 
 
 #batch , #inventoryPage{
-  overflow-x: hidden; 
+  overflow-x: hidden;
   color: black !important;
   background: white !important;
   padding-bottom: 1rem;
