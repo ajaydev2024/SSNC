@@ -1,7 +1,28 @@
-import React from 'react';
+import React ,{useEffect} from 'react';
 import Client from 'shopify-buy';
 
 const ProductCard = ({ product }) => {
+  useEffect(() => {
+    async function setCountryInCheckout() {
+      try {
+        const shop = await client.shop.fetchInfo();
+
+        const shopCountry = shop.countryCode;
+
+        const checkout = await client.checkout.create();
+
+        // Set the shop's country in the checkout
+        await client.checkout.updateAttributes(checkout.id, {
+          country: shopCountry,
+        });
+      } catch (error) {
+        console.error('Error setting shop country in checkout:', error);
+      }
+    }
+
+    setCountryInCheckout();
+  }, []);
+
   const client = Client.buildClient({
     domain: 'flex-wheeler.myshopify.com',
     storefrontAccessToken: '654ba1b2fc5161d5e9c92d68adc8bda4',
