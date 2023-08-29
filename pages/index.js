@@ -19,15 +19,20 @@ const Index = () => {
   }, []);
 
   return (
+    <>
+    <h1>Fetching Products  from <a href='https://flexwheelernutrition.com/'></a>flexwheelernutrition.com (Third party apps) </h1>
     <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4">
+     
       {shopifyData.length > 0 ? (
         shopifyData.map((product, index) => (
+          
           <ProductCard key={product.id} product={product} />
         ))
       ) : (
         <p>Data is Loading</p>
       )}
     </div>
+    </>
   );
 };
 
